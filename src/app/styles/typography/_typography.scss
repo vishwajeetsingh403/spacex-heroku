@@ -1,0 +1,56 @@
+@mixin fontSize($size) {
+    @if $size == h1 {
+      font-size: 3.2rem;
+    }
+
+    @if $size == h2 {
+      font-size: 2.4rem;
+    }
+
+    @if $size == h3 {
+      font-size: 2rem;
+    }
+
+    @if $size == h4 {
+      font-size: 1.8rem;
+    }
+
+    @if $size == h5 {
+      font-size: 1.6rem;
+    }
+
+    @if $size == h6 {
+      font-size: 1.4rem;
+    }
+
+    @if $size == h7 {
+      font-size: 1.2rem;
+    }
+
+    @if $size == h8 {
+      font-size: 1rem;
+    }
+
+    @if $size == h9 {
+      font-size: .8rem;
+    }
+  }
+
+  @mixin fontWeight($weight) {
+    @if $weight == bold {
+      font-weight: 900;
+    }
+
+    @if $weight == semibold {
+      font-weight: 600;
+    }
+
+    @if $weight == default {
+      font-weight: 400;
+    }
+  }
+
+  @mixin typography($size, $weight: default) {
+    @include fontSize($size);
+    @include fontWeight($weight);
+  }

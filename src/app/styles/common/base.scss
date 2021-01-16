@@ -1,0 +1,38 @@
+// Global Reset
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.75%;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Open-sans', 'Lato', Helvetica, Arial, sans-serif;
+  background: #eee;
+}
+
+button {
+  font-family: inherit;
+}
+
+input {
+  outline: none;
+  background-color: inherit;
+}
+
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+}

@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="main-container">
+    <div class="filters-container">
+        <h2>Filters</h2>
+        <p class="year-title">Launch Year</p>
+        <div class="filters">
+        <div class="launch-year" *ngFor="let year of uniqueYears; let i of index">
+            <p (click)="isYear($event.target.innerText)" [ngClass]="{selected: isYearSelected == i }">{{year}}</p>
+        </div>
+        </div>
+       <div class="filters-launch">
+        <div class="success-launch">
+            <p class="underlined">Successful Launch</p>
+            <div class="isSuccessLaunch">
+                <p (click)="isLaunched(true)" [ngClass]="{selected: isLaunchedSelected == true}">True</p>
+                <p (click)="isLaunched(false)" [ngClass]="{selected: isLaunchedSelected == false}">False</p>
+            </div>
+        </div>
+        <div class="success-landing">
+            <p class="underlined">Successful Landing</p>
+            <div class="isSuccessLand">
+                <p (click)="isLanded(true)" [ngClass]="{selected: isLandedSelected == true}">True</p>
+                <p (click)="isLanded(false)" [ngClass]="{selected: isLandedSelected == false}">False</p>
+            </div>
+        </div>
+       </div>
+    </div>
+    <div class="results-preview" *ngIf="!loading">
+        <div class="card" *ngFor="let cards of newFilterData">
+            <div class="card-image">
+                <img [src]="cards.mission_patch" alt="rocket-logo" />
+            </div>
+            <div class="card-info">
+                <p class="card-title">{{cards.mission_name}} #{{cards.flight_number}}</p>
+                <div *ngIf="cards.mission_id != 0">
+                <p><strong>Mission ID's: </strong></p>
+                <ul *ngFor="let list of cards.mission_id">
+                    <li>{{list}}</li>
+                </ul>
+                </div>
+                <p><strong>Launch Year:</strong> {{cards.launch_year}}</p>
+                <p><strong>Successful Launch:</strong> {{cards.launch_success}}</p>
+                <p><strong>Successful Landing:</strong> {{cards.land_success || false}}</p>
+            </div>
+        </div>
+        <app-noresults class="noResults" *ngIf="newFilterData.length == 0"></app-noresults>
+    </div>
+    <div class="loader">
+        <app-loader *ngIf="loading"></app-loader>
+    </div>
+</div>
