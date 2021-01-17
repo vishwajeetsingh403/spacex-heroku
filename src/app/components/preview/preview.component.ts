@@ -28,9 +28,11 @@ export class PreviewComponent{
 
   //rendering the whole list of data without any filters
   renderList(){
+    this.loading = true;
     this.preview.getPrograms().subscribe((data: any) => {
       //destructuring required data from the array
       this.previewData = data.map((newData) => {
+        this.loading = false;
         return {
           launch_year: newData.launch_year,
           mission_name : newData.mission_name,
