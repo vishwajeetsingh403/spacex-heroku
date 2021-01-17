@@ -7,13 +7,13 @@ import { PreviewService } from 'src/app/preview.service';
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent{
-  private loading: boolean = false;
+  public loading: boolean = false;
   private previewData;
-  private newFilterData;
-  private isLandedSelected = null;
-  private isLaunchedSelected = null;
-  private isYearSelected = null;
-  private uniqueYears = [];
+  public newFilterData;
+  public isLandedSelected = null;
+  public isLaunchedSelected = null;
+  public isYearSelected = null;
+  public uniqueYears = [];
   private filteredObj = {
     date: "",
     isLanded: null,
