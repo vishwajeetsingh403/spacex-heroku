@@ -28,10 +28,8 @@ export class PreviewComponent{
 
   //rendering the whole list of data without any filters
   renderList(){
-    this.loading = true;
     this.preview.getPrograms().subscribe((data: any) => {
       //destructuring required data from the array
-      this.loading = false;
       this.previewData = data.map((newData) => {
         return {
           launch_year: newData.launch_year,
@@ -60,69 +58,24 @@ export class PreviewComponent{
 
   //filtering data based on launch success
   isLaunched(isLaunced){
-    this.loading = true;
     this.filteredObj.isLaunch = isLaunced;
     this.isLaunchedSelected = isLaunced;
-    if(this.isYearSelected != null && this.isLandedSelected != null){
-    this.preview.getLaunchFilter(isLaunced).subscribe((data: any) => {
-      this.loading = false;
-      this.findFilter(data);
-      this.newFilterData = this.previewData;
-    })
-  }else{
-    this.loading = false;
     this.filteredList();
-  }
   }
 
   //filtering data based on land success
   isLanded(isLanded){
-    this.loading = true;
     this.filteredObj.isLanded = isLanded;
     this.isLandedSelected = isLanded;
-    if( this.isLaunchedSelected != null){
-    this.preview.getLaunchandLandFilter(this.isLaunchedSelected, this.isLandedSelected).subscribe((data: any) => {
-      this.loading = false;
-      this.findFilter(data);
-      this.newFilterData = this.previewData;
-    })
-  }else{
-    this.loading = false;
     this.filteredList();
-  }
   }
 
   //filtering data based on launch success, land success along with the repective years
   isYear(event){
-    this.loading = true;
     this.filteredObj.date = event;
     this.isYearSelected = event;
-    if(this.isLaunchedSelected != null){
-      this.preview.getAllFilters(this.isLaunchedSelected, this.isLandedSelected, this.isYearSelected).subscribe((data: any) => {
-        this.loading = false;
-        this.findFilter(data);
-        this.newFilterData = this.previewData;
-      })
-    }else{
-      this.loading = false;
-      this.filteredList();
-    }
+    this.filteredList();
   }
-
-  //common method to filter and returning structured data
-  findFilter(filterData){
-    this.previewData = filterData.map((newData) => {
-      return{
-        launch_year: newData.launch_year,
-            mission_name : newData.mission_name,
-            flight_number: newData.flight_number,
-            mission_id: newData.mission_id,
-            land_success : newData.rocket.first_stage.cores[0].land_success,
-            launch_success: newData.launch_success,
-            mission_patch: newData.links.mission_patch_small
-      }
-    })
-  };
 
   //filtering data based on one common api
   filteredList(){

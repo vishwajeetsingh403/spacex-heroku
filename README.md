@@ -37,3 +37,5 @@ The api endpoints provided does not give proper responses based on query params 
 For eg: Successful Launch api false or null gives empty response which can lead to a malfunction of all filters without passing proper success_launch value.
 
 A better approach and filter can be achieved with just one common api endpoint by using array filters.
+
+To run the optimised version of this application with just one endpoint, please checkout the branch `second-approach`.
