@@ -9,11 +9,13 @@ import { PreviewService } from 'src/app/preview.service';
 export class PreviewComponent{
   public loading: boolean = false;
   private previewData;
+  //rendering variable
   public newFilterData;
   public isLandedSelected = null;
   public isLaunchedSelected = null;
   public isYearSelected = null;
   public uniqueYears = [];
+  //storing common data on event listeners
   private filteredObj = {
     date: "",
     isLanded: null,
@@ -24,6 +26,7 @@ export class PreviewComponent{
     this.renderList();
   }
 
+  //rendering the whole list of data without any filters
   renderList(){
     this.loading = true;
     this.preview.getPrograms().subscribe((data: any) => {
@@ -45,6 +48,7 @@ export class PreviewComponent{
     })
   }
 
+  //removing duplicate years in order to show the same on year filters CTA's
   removeDuplicateYear(array) {
     array.map((year) => {
       if(!this.uniqueYears.includes(year.launch_year)) {
@@ -54,6 +58,7 @@ export class PreviewComponent{
     return this.uniqueYears;
   };
 
+  //filtering data based on launch success
   isLaunched(isLaunced){
     this.loading = true;
     this.filteredObj.isLaunch = isLaunced;
@@ -70,6 +75,7 @@ export class PreviewComponent{
   }
   }
 
+  //filtering data based on land success
   isLanded(isLanded){
     this.loading = true;
     this.filteredObj.isLanded = isLanded;
@@ -86,6 +92,7 @@ export class PreviewComponent{
   }
   }
 
+  //filtering data based on launch success, land success along with the repective years
   isYear(event){
     this.loading = true;
     this.filteredObj.date = event;
@@ -102,6 +109,7 @@ export class PreviewComponent{
     }
   }
 
+  //common method to filter and returning structured data
   findFilter(filterData){
     this.previewData = filterData.map((newData) => {
       return{
@@ -116,6 +124,7 @@ export class PreviewComponent{
     })
   };
 
+  //filtering data based on one common api
   filteredList(){
     this.newFilterData = this.previewData.filter((data) => {
       let isValid = true;
